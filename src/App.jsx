@@ -12,7 +12,7 @@ const App = () => {
         loading={<p>Maps Loading...</p>}
       >
         <NaverMap
-          mapDivId={'maps-getting-started-uncontrolled'}
+          mapDivId="maps-getting-started-uncontrolled"
           style={{
             width: '100%',
             height: '85vh',
