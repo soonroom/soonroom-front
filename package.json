@@ -17,7 +17,6 @@
   "bugs": {
     "url": "https://github.com/soonroom/soonroom-front/issues"
   },
-  "homepage": "https://github.com/soonroom/soonroom-front#readme",
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/plugin-transform-runtime": "^7.12.10",
@@ -42,12 +41,14 @@
     "prettier": "2.2.1",
     "style-loader": "^2.0.0",
     "terser-webpack-plugin": "^5.0.3",
+    "url-loader": "^4.1.1",
     "webpack": "^5.4.0",
     "webpack-cli": "^4.2.0",
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
     "axios": "^0.21.0",
+    "jquery": "^3.5.1",
     "moment": "^2.29.1",
     "open-color": "^1.7.0",
     "react": "^17.0.1",

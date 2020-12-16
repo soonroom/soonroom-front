@@ -34,7 +34,7 @@ const HeaderWrap = styled.div`
   position: sticky;
   top: 0;
   width: 100%;
-  height: 7.5vh;
+  height: 70px;
   line-height: 70px;
   margin: 0 auto;
   backdrop-filter: saturate(200%) blur(20px);
@@ -97,7 +97,7 @@ const HeaderInner = styled.div`
     .under {
       position: absolute;
       overflow: hidden;
-      top: 25px;
+      top: 50px;
       height: 3px;
       width: 0;
       background: ${oc.teal[4]};

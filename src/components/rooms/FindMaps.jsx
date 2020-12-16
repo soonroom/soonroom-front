@@ -1,5 +1,9 @@
 import React, { useEffect } from 'react';
+import $ from 'jquery';
 import RoomList from 'Src/components/rooms/RoomList';
+import ClusterMarker1 from 'Static/img/clustermarker1.png';
+import { accidentDeath } from './accidentdeath';
+import { MarkerClustering } from './marker-clustering';
 
 const FindMaps = () => {
   const polygon1 = new naver.maps.Polygon({
@@ -17,6 +21,7 @@ const FindMaps = () => {
     strokeColor: 'red',
     strokeOpacity: 0.6,
     strokeWeight: 3,
+    clickable: true,
   });
   const polygon2 = new naver.maps.Polygon({
     paths: [
@@ -33,6 +38,7 @@ const FindMaps = () => {
     strokeColor: 'orange',
     strokeOpacity: 0.6,
     strokeWeight: 3,
+    clickable: true,
   });
   const polygon3 = new naver.maps.Polygon({
     paths: [
@@ -49,6 +55,7 @@ const FindMaps = () => {
     strokeColor: 'blue',
     strokeOpacity: 0.6,
     strokeWeight: 3,
+    clickable: true,
   });
   const polygon4 = new naver.maps.Polygon({
     paths: [
@@ -67,16 +74,64 @@ const FindMaps = () => {
     strokeColor: 'purple',
     strokeOpacity: 0.6,
     strokeWeight: 3,
+    clickable: true,
   });
   useEffect(() => {
     const map = new naver.maps.Map('map', {
       center: new naver.maps.LatLng(36.773869, 126.932839),
       zoom: 16,
+      zoomControl: true,
+      zoomControlOptions: {
+        position: naver.maps.Position.TOP_RIGHT,
+        style: naver.maps.ZoomControlStyle.SMALL,
+      },
+    });
+    const markers = [];
+    const data = accidentDeath.searchResult.accidentDeath;
+
+    for (let i = 0, ii = data.length; i < ii; i++) {
+      const spot = data[i];
+      const latlng = new naver.maps.LatLng(spot.grd_la, spot.grd_lo);
+      const marker = new naver.maps.Marker({
+        position: latlng,
+        draggable: true,
+      });
+
+      markers.push(marker);
+    }
+
+    const marker1 = {
+      content:
+        '<div style="background:#364fc7;width:70px;height:70px;border-radius:50%;opacity:0.8;cursor:pointer;line-height:70px;font-size:24px;color:white;text-align:center;font-weight:bold;"></div>',
+      size: N.Size(40, 40),
+      anchor: N.Point(20, 20),
+    };
+
+    const markerClustering = new MarkerClustering({
+      minClusterSize: 2,
+      maxZoom: 17,
+      map,
+      markers,
+      disableClickZoom: true,
+      gridSize: 120,
+      icons: [marker1],
+      indexGenerator: [10],
+      stylingFunction(clusterMarker, count) {
+        $(clusterMarker.getElement()).find('div:first-child').text(count);
+      },
+    });
+    new naver.maps.Event.addListener(marker1, 'click', function (e) {
+      console.log(`좌표: ${e.coord.toString()}`);
     });
     polygon1.setMap(map);
     polygon2.setMap(map);
     polygon3.setMap(map);
     polygon4.setMap(map);
+    markerClustering.setDisableClickZoom();
+    markerClustering.setMap(map);
+    return () => {
+      new naver.maps.Event.removeListener(marker1, 'click');
+    };
   }, []);
   return (
     <div style={{ display: 'flex' }}>
