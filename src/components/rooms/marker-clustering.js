@@ -431,7 +431,7 @@ naver.maps.Util.ClassExtend(MarkerClustering, naver.maps.OverlayView, {
  * 마커를 가지고 있는 클러스터를 정의합니다.
  * @param {MarkerClustering} markerClusterer
  */
-var Cluster = function (markerClusterer) {
+export const Cluster = function (markerClusterer) {
   this._clusterCenter = null;
   this._clusterBounds = null;
   this._clusterMarker = null;

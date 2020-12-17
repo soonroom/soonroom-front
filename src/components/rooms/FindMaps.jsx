@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import $ from 'jquery';
 import RoomList from 'Src/components/rooms/RoomList';
-import ClusterMarker1 from 'Static/img/clustermarker1.png';
 import { accidentDeath } from './accidentdeath';
-import { MarkerClustering } from './marker-clustering';
+import { Cluster, MarkerClustering } from './marker-clustering';
 
 const FindMaps = () => {
   const polygon1 = new naver.maps.Polygon({
@@ -108,34 +107,31 @@ const FindMaps = () => {
     };
 
     const markerClustering = new MarkerClustering({
-      minClusterSize: 2,
+      minClusterSize: 3,
       maxZoom: 17,
       map,
       markers,
       disableClickZoom: true,
-      gridSize: 120,
+      gridSize: 100,
       icons: [marker1],
       indexGenerator: [10],
       stylingFunction(clusterMarker, count) {
         $(clusterMarker.getElement()).find('div:first-child').text(count);
       },
     });
-    new naver.maps.Event.addListener(marker1, 'click', function (e) {
-      console.log(`좌표: ${e.coord.toString()}`);
-    });
     polygon1.setMap(map);
     polygon2.setMap(map);
     polygon3.setMap(map);
     polygon4.setMap(map);
-    markerClustering.setDisableClickZoom();
+    // markerClustering.setDisableClickZoom();
     markerClustering.setMap(map);
     return () => {
-      new naver.maps.Event.removeListener(marker1, 'click');
+      new naver.maps.Event.removeListener(polygon1, 'click');
     };
   }, []);
   return (
     <div style={{ display: 'flex' }}>
-      <div id="map" style={{ width: '70%', height: '92.5vh' }} />
+      <div id="map" style={{ width: '70%', height: '92.5vh', position: 'relative' }} />
       <RoomList />
     </div>
   );

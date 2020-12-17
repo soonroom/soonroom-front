@@ -10,6 +10,14 @@ export const accidentDeath = {
         grd_lo: '126.93147',
         grd_la: '36.7730698',
       },
+      {
+        grd_lo: '126.931433599',
+        grd_la: '36.7730698',
+      },
+      {
+        grd_lo: '126.93250645',
+        grd_la: '36.7730698',
+      },
     ],
   },
   resultCode: 'Success',
