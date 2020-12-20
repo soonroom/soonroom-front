@@ -1,0 +1,28 @@
+{
+  "data": [
+    {
+      "id": 0,
+      "name": "수빌리지",
+      "rent": 345,
+      "is_aircon": true
+    },
+    {
+      "id": 1,
+      "name": "탑엑스",
+      "rent": 270,
+      "is_aircon": true
+    },
+    {
+      "id": 2,
+      "name": "에이플러스빌",
+      "rent": 845,
+      "is_aircon": true
+    },
+    {
+      "id": 3,
+      "name": "진정대",
+      "rent": 180,
+      "is_aircon": true
+    }
+  ]
+}
