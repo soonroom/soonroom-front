@@ -47,8 +47,13 @@ module.exports = {
     modules: ['node_modules'],
     extensions: ['.js', '.json', '.jsx', '.css'],
     alias: {
-      Src: path.resolve(__dirname, 'src'),
-      Static: path.resolve(__dirname, 'static'),
+      '@src': path.resolve(__dirname, 'src'),
+      '@assets': path.resolve(__dirname, 'src/assets'),
+      '@components': path.resolve(__dirname, 'src/components'),
+      '@hooks': path.resolve(__dirname, 'src/hooks'),
+      '@modules': path.resolve(__dirname, 'src/modules'),
+      '@pages': path.resolve(__dirname, 'src/pages'),
+      '@api': path.resolve(__dirname, 'src/api'),
     },
   },
   plugins: [

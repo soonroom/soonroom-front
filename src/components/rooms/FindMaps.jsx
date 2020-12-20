@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import RoomList from 'Src/components/rooms/RoomList';
-import { roomsCenter } from 'Static/js/roomsData';
+import { roomsCenter } from '@assets/js/roomsData';
 
 const FindMaps = () => {
   const naverMaps = window.naver.maps;
@@ -25,7 +24,9 @@ const FindMaps = () => {
           strokeOpacity: 0.6,
           strokeWeight: 3,
           clickable: true,
-        }),
+        })
+    );
+    roomsCenter.map(
       r =>
         new naverMaps.Marker({
           map,
@@ -45,9 +46,8 @@ const FindMaps = () => {
     };
   }, []);
   return (
-    <div style={{ display: 'flex' }}>
-      <div id="map" style={{ width: '70%', height: '92.5vh', position: 'relative' }} />
-      <RoomList />
+    <div>
+      <div id="map" style={{ width: '70vw', height: '92.5vh' }} />
     </div>
   );
 };
