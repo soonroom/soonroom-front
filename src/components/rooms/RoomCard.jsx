@@ -6,8 +6,8 @@ const RoomList = ({ data }) => {
   return (
     <RoomCardWrap>
       <div>이름: {data.name}</div>
-      <div>에어컨: {data.is_aircon ? '있음' : '없음'}</div>
       <div>방세: {data.rent}</div>
+      <div>전화번호: {data.is_aircon ? '있음' : '없음'}</div>
     </RoomCardWrap>
   );
 };
