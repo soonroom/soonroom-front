@@ -5,7 +5,7 @@ import oc from 'open-color';
 const RoomList = ({ data }) => {
   return (
     <RoomCardWrap>
-      <div>이름: {data.name}</div>
+      <div className="room-title">이름: {data.name}</div>
       <div>방세: {data.rent}</div>
       <div>전화번호: {data.is_aircon ? '있음' : '없음'}</div>
     </RoomCardWrap>
@@ -20,6 +20,9 @@ const RoomCardWrap = styled.div`
   padding: 1rem;
   & + & {
     margin-top: 1rem;
+  }
+  .room-title {
+    font-weight: 600;
   }
 `;
 
