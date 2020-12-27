@@ -8,6 +8,7 @@ const Footer = () => {
       <div>푸터</div>
       <Link to="instagram.com">인스타</Link>
       <Link to="fb.com">페이스북</Link>
+      <Link to="codingdog.com">회사소개</Link>
     </FooterWrap>
   );
 };
