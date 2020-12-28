@@ -11,19 +11,15 @@ const Header = () => {
           <div className="logo">
             <Link to="/">순룸</Link>
           </div>
-          <div className="menu">
-            <div className="menu rank">
-              <Link to="/rank">랭킹</Link>
-              <div className="under" />
-            </div>
-            <div className="menu chat">
-              <Link to="/chat">채팅방</Link>
-              <div className="under" />
-            </div>
-          </div>
         </div>
-        <div>
+        {/* <div>
           <Button onClick={null}>로그인</Button>
+        </div> */}
+        <div className="menu">
+          <div className="menu rank">
+            <Link to="/room">방찾기</Link>
+            <div className="under" />
+          </div>
         </div>
       </HeaderInner>
     </HeaderWrap>
@@ -36,7 +32,6 @@ const HeaderWrap = styled.div`
   width: 100%;
   height: 70px;
   line-height: 70px;
-  margin: 0 auto;
   backdrop-filter: saturate(200%) blur(20px);
   background: rgba(255, 255, 255, 0.8);
   color: black;
@@ -45,10 +40,8 @@ const HeaderWrap = styled.div`
 `;
 const HeaderInner = styled.div`
   display: flex;
-  max-width: 1200px;
-  width: 100%;
+  margin: 0 2rem;
   align-items: center;
-  margin: 0 auto;
   justify-content: space-between;
   & > div {
     display: flex;
@@ -105,23 +98,23 @@ const HeaderInner = styled.div`
     }
   }
 `;
-const Button = styled.button`
-  height: 35px;
-  width: 75px;
-  background: white;
-  border: 1px solid ${oc.teal[4]};
-  color: black;
-  border-radius: 5px;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  cursor: pointer;
-  padding: 0;
-  transition: all 0.3s;
-  &:hover {
-    border: 1px solid ${oc.teal[4]};
-    background: ${oc.teal[4]};
-    color: white;
-  }
-`;
+// const Button = styled.button`
+//   height: 35px;
+//   width: 75px;
+//   background: white;
+//   border: 1px solid ${oc.teal[4]};
+//   color: black;
+//   border-radius: 5px;
+//   font-size: 0.8125rem;
+//   font-weight: 600;
+//   cursor: pointer;
+//   padding: 0;
+//   transition: all 0.3s;
+//   &:hover {
+//     border: 1px solid ${oc.teal[4]};
+//     background: ${oc.teal[4]};
+//     color: white;
+//   }
+// `;
 
 export default Header;

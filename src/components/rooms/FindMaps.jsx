@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
+import styled from 'styled-components';
 import { roomsCenter } from '@assets/js/roomsData';
 
 const FindMaps = () => {
   const naverMaps = window.naver.maps;
   useEffect(() => {
     const map = new naverMaps.Map('map', {
-      center: new naverMaps.LatLng(36.773869, 126.932839),
+      center: new naverMaps.LatLng(36.774869, 126.932839),
       zoom: 16,
       zoomControl: true,
       zoomControlOptions: {
@@ -46,10 +47,18 @@ const FindMaps = () => {
     };
   }, []);
   return (
-    <div>
-      <div id="map" style={{ width: '70vw', height: '92.5vh' }} />
-    </div>
+    <MapWrap>
+      <div id="map" />
+    </MapWrap>
   );
 };
+
+const MapWrap = styled.div`
+  margin-top: 0.1vh;
+  width: 70vw;
+  #map {
+    height: 100%;
+  }
+`;
 
 export default FindMaps;

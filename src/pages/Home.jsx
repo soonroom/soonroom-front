@@ -1,23 +1,15 @@
 import React from 'react';
-import styled from 'styled-components';
 import Header from '@components/common/Header';
-import FindMaps from '@components/rooms/FindMaps';
-import RoomList from '@components/rooms/RoomList';
+import Footer from '@components/common/Footer';
 
 export const Home = () => {
   return (
     <>
       <Header />
-      <ContentsWrap>
-        <FindMaps />
-        <RoomList />
-      </ContentsWrap>
+      asdf
+      <Footer />
     </>
   );
 };
-
-const ContentsWrap = styled.div`
-  display: flex;
-`;
 
 export default Home;

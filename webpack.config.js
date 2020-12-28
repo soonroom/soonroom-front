@@ -5,18 +5,17 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-const mode = process.env.NODE_ENV || 'development';
-
-module.exports = {
+module.exports = (env, argv) => ({
   entry: './src/index.jsx',
   output: {
     path: path.resolve(__dirname, '/build'),
     filename: 'bundle.[fullhash].js',
   },
-  mode,
-  devtool: 'eval',
+  mode: argv.mode,
+  devtool: argv.mode === 'production' ? 'cheap-module-source-map' : 'inline-source-map',
   devServer: {
     contentBase: path.resolve(__dirname, '/build'),
+    historyApiFallback: true,
     index: 'index.html',
     port: 3000,
     hot: true,
@@ -57,7 +56,7 @@ module.exports = {
     },
   },
   plugins: [
-    mode === 'production'
+    argv.mode === 'production'
       ? new webpack.optimize.OccurrenceOrderPlugin()
       : new webpack.HotModuleReplacementPlugin(),
     new TerserPlugin({
@@ -75,4 +74,4 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
   ],
-};
+});

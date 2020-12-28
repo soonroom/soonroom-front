@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import roomdata from '@assets/json/roomdata.json';
-import RoomCard from './RoomCard';
+import RoomCard from './Card';
 
 const RoomList = () => {
   const { data } = roomdata;
