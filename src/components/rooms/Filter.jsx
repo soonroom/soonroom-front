@@ -13,14 +13,16 @@ const Filter = () => {
   };
   const CloseModal = e => {
     const { name } = e.target;
+
     if (
       (active.room || active.sale || active.price || active.option) &&
-      !modalEl.current.contains(e.target)
+      (!modalEl.current || !modalEl.current.contains(e.target))
     )
       setActive({ room: false, sale: false, price: false, option: false, [name]: !active[name] });
   };
   useEffect(() => {
     window.addEventListener('click', CloseModal);
+    console.log(active);
     return () => {
       window.removeEventListener('click', CloseModal);
     };
@@ -107,6 +109,13 @@ const FilterBox = styled.div`
   flex: 0 0 80%;
   padding: 1rem;
   align-items: center;
+  .active {
+    button {
+      border: 1px solid ${oc.teal[5]};
+      background: url(${arrowUp}) right 10px center / 10px no-repeat;
+      color: ${oc.teal[5]};
+    }
+  }
 `;
 
 const FilterButton = styled.div`
@@ -127,13 +136,6 @@ const FilterButton = styled.div`
     color: rgb(34, 34, 34);
     font-size: 13px;
     font-weight: 700;
-  }
-  .active {
-    button {
-      border: 1px solid ${oc.teal[5]};
-      background: url(${arrowUp}) right 10px center / 10px no-repeat;
-      color: ${oc.teal[5]};
-    }
   }
 `;
 
