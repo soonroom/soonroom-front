@@ -4,6 +4,25 @@ import oc from 'open-color';
 import arrowDown from '@assets/svg/arrowDown.svg';
 import arrowUp from '@assets/svg/arrowUp.svg';
 
+const filterOptions = [
+  { aircon: '에어컨' },
+  { bed: '침대' },
+  { desk: '책상' },
+  { closet: '옷장' },
+  { TV: 'TV' },
+  { freeze: '냉장고' },
+  { gas: '가스레인지' },
+  { hightlight: '하이라이트' },
+  { dryer: '건조기' },
+  { internet: '인터넷' },
+  { modem: '공유기' },
+  { bunkBed: '2층침대' },
+  { bidet: '비데' },
+  { postLocker: '무인택배함' },
+  { washer: '일반세탁기' },
+  { drumWasher: '드럼세탁기' },
+  { elevator: '엘리베이터' },
+];
 const Filter = () => {
   const [active, setActive] = useState({ room: false, sale: false, price: false, option: false });
   const modalEl = useRef();
@@ -36,9 +55,27 @@ const Filter = () => {
             방종류
           </button>
           {active.room && (
-            <FilterModal ref={modalEl}>
+            <RoomTypeModal ref={modalEl}>
               <h2>방종류</h2>
-            </FilterModal>
+              <div>
+                <label htmlFor="mothTax">
+                  <input type="checkbox" name="monthTax" />
+                  원룸
+                </label>
+              </div>
+              <div>
+                <label htmlFor="yearTax">
+                  <input type="checkbox" name="yearTax" />
+                  투룸
+                </label>
+              </div>
+              <div>
+                <label htmlFor="totalTax">
+                  <input type="checkbox" name="totalTax" />
+                  쓰리룸
+                </label>
+              </div>
+            </RoomTypeModal>
           )}
         </FilterButton>
         <FilterButton className={active.sale ? 'active' : ''}>
@@ -46,9 +83,33 @@ const Filter = () => {
             매물종류
           </button>
           {active.sale && (
-            <FilterModal ref={modalEl}>
+            <RentTypeModal ref={modalEl}>
               <h2>매물종류</h2>
-            </FilterModal>
+              <div>
+                <label htmlFor="mothTax">
+                  <input type="checkbox" name="monthTax" />
+                  월세
+                </label>
+              </div>
+              <div>
+                <label htmlFor="yearTax">
+                  <input type="checkbox" name="yearTax" />
+                  연세
+                </label>
+              </div>
+              <div>
+                <label htmlFor="totalTax">
+                  <input type="checkbox" name="totalTax" />
+                  전세
+                </label>
+              </div>
+              <div>
+                <label htmlFor="LHTax">
+                  <input type="checkbox" name="LHTax" />
+                  LH
+                </label>
+              </div>
+            </RentTypeModal>
           )}
         </FilterButton>
         <FilterButton className={active.price ? 'active' : ''}>
@@ -56,9 +117,28 @@ const Filter = () => {
             가격대
           </button>
           {active.price && (
-            <FilterModal ref={modalEl}>
-              <h2>가격대</h2>
-            </FilterModal>
+            <PriceModal ref={modalEl}>
+              <div className="title-price">
+                <h2>월세</h2>
+                <div>20만원</div>
+              </div>
+              <input type="range" name="monthPrice" defaultValue={0} />
+              <div className="title-price">
+                <h2>연세</h2>
+                <div>300만원</div>
+              </div>
+              <input type="range" name="yearPrice" defaultValue={0} />
+              <div className="title-price">
+                <h2>전세</h2>
+                <div>150만원</div>
+              </div>
+              <input type="range" name="totalPrice" defaultValue={0} />
+              <div className="title-price">
+                <h2>LH</h2>
+                <div>3만원</div>
+              </div>
+              <input type="range" name="LHPrice" defaultValue={0} />
+            </PriceModal>
           )}
         </FilterButton>
         <FilterButton className={active.option ? 'active' : ''}>
@@ -66,9 +146,19 @@ const Filter = () => {
             옵션
           </button>
           {active.option && (
-            <FilterModal ref={modalEl}>
+            <OptionModal ref={modalEl}>
               <h2>옵션</h2>
-            </FilterModal>
+              <div className="option-wrap">
+                {filterOptions.map(o => (
+                  <div key={o.key}>
+                    <label htmlFor={Object.keys(o)}>
+                      <input type="checkbox" name={Object.keys(o)} />
+                      {Object.values(o)}
+                    </label>
+                  </div>
+                ))}
+              </div>
+            </OptionModal>
           )}
         </FilterButton>
       </FilterBox>
@@ -147,6 +237,54 @@ const FilterModal = styled.div`
   background-color: rgb(255, 255, 255);
   width: 320px;
   z-index: 99;
+`;
+
+const RoomTypeModal = styled(FilterModal)`
+  div {
+    margin: 0.5rem auto;
+  }
+  input {
+    margin-right: 0.3rem;
+  }
+`;
+
+const RentTypeModal = styled(FilterModal)`
+  div {
+    margin: 0.5rem auto;
+  }
+  input {
+    margin-right: 0.3rem;
+  }
+`;
+
+const PriceModal = styled(FilterModal)`
+  .title-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin: 1rem auto;
+    h2 {
+      margin: 0;
+    }
+  }
+  input {
+    width: 100%;
+  }
+`;
+
+const OptionModal = styled(FilterModal)`
+  width: 400px;
+  .option-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    div {
+      flex: 0 0 33.33%;
+      padding: 0.5rem;
+    }
+    input {
+      margin-right: 0.3rem;
+    }
+  }
 `;
 
 export default Filter;

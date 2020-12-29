@@ -4,8 +4,6 @@ import { rooms, roomsCenter } from '@assets/js/roomsData';
 
 const FindMaps = () => {
   const naverMaps = window.naver.maps;
-  const polygonObj = [];
-  const markerObj = [];
   const sectorMarker = [];
   let sector;
   useEffect(() => {
@@ -18,8 +16,8 @@ const FindMaps = () => {
         style: naverMaps.ZoomControlStyle.SMALL,
       },
     });
-    roomsCenter.map(r =>
-      polygonObj.push(
+    const polygonObj = roomsCenter.map(
+      r =>
         new naverMaps.Polygon({
           map,
           paths: r.paths,
@@ -30,10 +28,9 @@ const FindMaps = () => {
           strokeWeight: 3,
           clickable: true,
         })
-      )
     );
-    roomsCenter.map(r =>
-      markerObj.push(
+    const markerObj = roomsCenter.map(
+      r =>
         new naverMaps.Marker({
           map,
           position: new naverMaps.LatLng(r.lat, r.lng),
@@ -43,22 +40,19 @@ const FindMaps = () => {
             anchor: new naverMaps.Point(40, 40),
           },
         })
-      )
     );
-    markerObj.map(
-      (m, index) => (
-        naverMaps.Event.addListener(m, 'mouseover', e =>
-          polygonObj[index].setOptions({ fillOpacity: 0.3, strokeOpacity: 0.8 })
-        ),
-        naverMaps.Event.addListener(m, 'mouseout', e =>
-          polygonObj[index].setOptions({ fillOpacity: 0, strokeOpacity: 0 })
-        ),
-        naverMaps.Event.addListener(m, 'click', e => {
-          sector = index;
-          map.zoomBy(1, m.position);
-        })
-      )
-    );
+    markerObj.forEach((m, index) => {
+      naverMaps.Event.addListener(m, 'mouseover', () =>
+        polygonObj[index].setOptions({ fillOpacity: 0.3, strokeOpacity: 0.8 })
+      );
+      naverMaps.Event.addListener(m, 'mouseout', () =>
+        polygonObj[index].setOptions({ fillOpacity: 0, strokeOpacity: 0 })
+      );
+      naverMaps.Event.addListener(m, 'click', () => {
+        sector = index;
+        map.zoomBy(1, m.position);
+      });
+    });
     naverMaps.Event.addListener(map, 'zoom_changed', zoom => {
       const zoomlevel = zoom;
       if (zoomlevel > 16) {
@@ -74,6 +68,7 @@ const FindMaps = () => {
         sectorMarker.map((s, index) =>
           naverMaps.Event.addListener(s, 'click', e => {
             console.log(index);
+            console.log(e);
             // 이 부분에 마커 클릭 이벤트 수정
           })
         );
