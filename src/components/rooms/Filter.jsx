@@ -13,7 +13,6 @@ const Filter = () => {
   };
   const CloseModal = e => {
     const { name } = e.target;
-
     if (
       (active.room || active.sale || active.price || active.option) &&
       (!modalEl.current || !modalEl.current.contains(e.target))
@@ -22,7 +21,6 @@ const Filter = () => {
   };
   useEffect(() => {
     window.addEventListener('click', CloseModal);
-    console.log(active);
     return () => {
       window.removeEventListener('click', CloseModal);
     };
