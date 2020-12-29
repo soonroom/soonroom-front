@@ -94,8 +94,8 @@ const SearchBox = styled.div`
     border: 0px;
     border-right: 1px solid rgba(81, 99, 120, 0.3);
     outline: none;
-    font-size: 24px;
-    padding: 1rem;
+    font-size: 18px;
+    padding: 2rem;
   }
   input::placeholder {
     color: rgba(81, 99, 120, 0.3);

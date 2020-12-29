@@ -7,6 +7,7 @@ const FindMaps = () => {
   const polygonObj = [];
   const markerObj = [];
   const sectorMarker = [];
+  let sector;
   useEffect(() => {
     const map = new naverMaps.Map('map', {
       center: new naverMaps.LatLng(36.774869, 126.932839),
@@ -17,7 +18,6 @@ const FindMaps = () => {
         style: naverMaps.ZoomControlStyle.SMALL,
       },
     });
-    const defaultCenter = map.getCenter();
     roomsCenter.map(r =>
       polygonObj.push(
         new naverMaps.Polygon({
@@ -45,7 +45,6 @@ const FindMaps = () => {
         })
       )
     );
-    let sector;
     markerObj.map(
       (m, index) => (
         naverMaps.Event.addListener(m, 'mouseover', e =>
@@ -71,6 +70,12 @@ const FindMaps = () => {
               position: new naverMaps.LatLng(r.lat, r.lng),
             })
           )
+        );
+        sectorMarker.map((s, index) =>
+          naverMaps.Event.addListener(s, 'click', e => {
+            console.log(index);
+            // 이 부분에 마커 클릭 이벤트 수정
+          })
         );
       }
       if (zoomlevel < 17) {
