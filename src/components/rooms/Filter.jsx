@@ -7,23 +7,23 @@ import arrowDown from '@assets/svg/arrowDown.svg';
 import arrowUp from '@assets/svg/arrowUp.svg';
 
 const filterOptions = [
-  { aircon: '에어컨' },
-  { bed: '침대' },
-  { desk: '책상' },
-  { closet: '옷장' },
-  { TV: 'TV' },
-  { freeze: '냉장고' },
-  { gas: '가스레인지' },
-  { hightlight: '하이라이트' },
-  { dryer: '건조기' },
-  { internet: '인터넷' },
-  { modem: '공유기' },
-  { bunkBed: '2층침대' },
-  { bidet: '비데' },
-  { postLocker: '무인택배함' },
-  { washer: '일반세탁기' },
-  { drumWasher: '드럼세탁기' },
-  { elevator: '엘리베이터' },
+  { id: 0, aircon: '에어컨' },
+  { id: 1, bed: '침대' },
+  { id: 2, desk: '책상' },
+  { id: 3, closet: '옷장' },
+  { id: 4, TV: 'TV' },
+  { id: 5, freeze: '냉장고' },
+  { id: 6, gas: '가스레인지' },
+  { id: 7, hightlight: '하이라이트' },
+  { id: 8, dryer: '건조기' },
+  { id: 9, internet: '인터넷' },
+  { id: 10, modem: '공유기' },
+  { id: 11, bunkBed: '2층침대' },
+  { id: 12, bidet: '비데' },
+  { id: 13, postLocker: '무인택배함' },
+  { id: 14, washer: '일반세탁기' },
+  { id: 15, drumWasher: '드럼세탁기' },
+  { id: 16, elevator: '엘리베이터' },
 ];
 
 const Filter = () => {
@@ -185,8 +185,8 @@ const Filter = () => {
             <OptionModal ref={modalEl}>
               <h2>옵션</h2>
               <div className="option-wrap">
-                {filterOptions.map((o, index) => (
-                  <div key={index}>
+                {filterOptions.map(o => (
+                  <div key={o.id}>
                     <input id={Object.keys(o)} type="checkbox" name={Object.keys(o)} />
                     <label htmlFor={Object.keys(o)}>{Object.values(o)}</label>
                   </div>
