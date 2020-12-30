@@ -7,11 +7,11 @@ import arrowUp from '@assets/svg/arrowUp.svg';
 const filterOptions = [
   { aircon: '에어컨' },
   { bed: '침대' },
-  { desk: '책상' },
+  { desk: '책상' },
   { closet: '옷장' },
   { TV: 'TV' },
-  { freeze: '냉장고' },
-  { gas: '가스레인지' },
+  { freeze: '냉장고' },
+  { gas: '가스레인지' },
   { hightlight: '하이라이트' },
   { dryer: '건조기' },
   { internet: '인터넷' },
