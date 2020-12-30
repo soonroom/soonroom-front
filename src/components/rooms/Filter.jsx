@@ -23,6 +23,7 @@ const filterOptions = [
   { drumWasher: '드럼세탁기' },
   { elevator: '엘리베이터' },
 ];
+
 const Filter = () => {
   const [active, setActive] = useState({ room: false, sale: false, price: false, option: false });
   const modalEl = useRef();
