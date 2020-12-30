@@ -13,16 +13,16 @@ const RangeSlider = ({ min, max, step, price, onChange }) => {
       values={price}
       onChange={onChange}
       renderTrack={({ props, children }) => (
-        <StyledRangeSliderBar {...props} min={min} max={max} price={price}>
+        <StyledRangeTrack {...props} min={min} max={max} price={price}>
           {children}
-        </StyledRangeSliderBar>
+        </StyledRangeTrack>
       )}
-      renderThumb={({ props }) => <StyledRangeSlider {...props} />}
+      renderThumb={({ props }) => <StyledRangeThumb {...props} />}
     />
   );
 };
 
-const StyledRangeSliderBar = styled.div`
+const StyledRangeTrack = styled.div`
   position: relative;
   height: 5px;
   width: 100%;
@@ -39,7 +39,7 @@ const StyledRangeSliderBar = styled.div`
   cursor: default !important;
 `;
 
-const StyledRangeSlider = styled.div`
+const StyledRangeThumb = styled.div`
   position: absolute;
   top: 0;
   width: 24px;
