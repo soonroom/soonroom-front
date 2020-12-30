@@ -4,8 +4,8 @@ import { rooms, roomsCenter } from '@assets/js/roomsData';
 
 const FindMaps = () => {
   const naverMaps = window.naver.maps;
-  const sectorMarker = [];
-  let sector;
+  const sectionMarker = [];
+  let section;
   useEffect(() => {
     const map = new naverMaps.Map('map', {
       center: new naverMaps.LatLng(36.774869, 126.932839),
@@ -49,23 +49,40 @@ const FindMaps = () => {
         polygonObj[index].setOptions({ fillOpacity: 0, strokeOpacity: 0 })
       );
       naverMaps.Event.addListener(m, 'click', () => {
-        sector = index;
-        map.zoomBy(1, m.position);
+        section = index;
+        map.updateBy(m.position, 17);
       });
     });
     naverMaps.Event.addListener(map, 'zoom_changed', zoom => {
       const zoomlevel = zoom;
       if (zoomlevel > 16) {
         markerObj.map(m => m.setVisible(false));
-        rooms[sector].map(r =>
-          sectorMarker.push(
-            new naverMaps.Marker({
-              map,
-              position: new naverMaps.LatLng(r.lat, r.lng),
-            })
-          )
-        );
-        sectorMarker.map((s, index) =>
+        if (Object.is(section)) {
+          const tempRooms = rooms.reduce((total, amount) => {
+            amount.forEach(room => {
+              total.push(room);
+            });
+            return total;
+          }, []);
+          tempRooms.map(r =>
+            sectionMarker.push(
+              new naverMaps.Marker({
+                map,
+                position: new naverMaps.LatLng(r.lat, r.lng),
+              })
+            )
+          );
+        } else {
+          rooms[section].map(r =>
+            sectionMarker.push(
+              new naverMaps.Marker({
+                map,
+                position: new naverMaps.LatLng(r.lat, r.lng),
+              })
+            )
+          );
+        }
+        sectionMarker.map((s, index) =>
           naverMaps.Event.addListener(s, 'click', e => {
             console.log(index);
             console.log(e);
@@ -75,7 +92,7 @@ const FindMaps = () => {
       }
       if (zoomlevel < 17) {
         markerObj.map(m => m.setVisible(true));
-        sectorMarker.map(m => m.setMap(null));
+        sectionMarker.map(m => m.setMap(null));
       }
     });
     return () => {

@@ -27,6 +27,7 @@ const StyledRangeSliderBar = styled.div`
   height: 5px;
   width: 100%;
   border-radius: 4px;
+  margin-top: 1.5rem;
   background: ${props =>
     getTrackBackground({
       values: props.price,

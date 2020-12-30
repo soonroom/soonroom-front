@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import oc from 'open-color';
+import { GrSearch } from 'react-icons/gr';
 import RangeSlider from '@components/common/RangeSlider';
 import arrowDown from '@assets/svg/arrowDown.svg';
 import arrowUp from '@assets/svg/arrowUp.svg';
@@ -59,7 +60,7 @@ const Filter = () => {
   return (
     <FilterWrap>
       <SearchBox>
-        <input type="text" name="keyword" placeholder="검색어를 입력해주세요" />
+        <input type="text" name="keyword" placeholder="검색어를 입력해주세요" /> <GrSearch />
       </SearchBox>
       <FilterBox>
         <FilterButton className={active.room ? 'active' : ''}>
@@ -70,22 +71,16 @@ const Filter = () => {
             <RoomTypeModal ref={modalEl}>
               <h2>방종류</h2>
               <div>
-                <label htmlFor="mothTax">
-                  <input type="checkbox" name="monthTax" />
-                  원룸
-                </label>
+                <input id="oneroom" type="checkbox" name="monthTax" checked />
+                <label htmlFor="oneroom">원룸</label>
               </div>
               <div>
-                <label htmlFor="yearTax">
-                  <input type="checkbox" name="yearTax" />
-                  투룸
-                </label>
+                <input id="tworoom" type="checkbox" name="yearTax" checked />
+                <label htmlFor="tworoom">투룸</label>
               </div>
               <div>
-                <label htmlFor="totalTax">
-                  <input type="checkbox" name="totalTax" />
-                  쓰리룸
-                </label>
+                <input id="threeroom" type="checkbox" name="totalTax" checked />
+                <label htmlFor="threeroom">쓰리룸</label>
               </div>
             </RoomTypeModal>
           )}
@@ -98,28 +93,20 @@ const Filter = () => {
             <RentTypeModal ref={modalEl}>
               <h2>매물종류</h2>
               <div>
-                <label htmlFor="mothTax">
-                  <input type="checkbox" name="monthTax" />
-                  월세
-                </label>
+                <input id="monthTax" type="checkbox" name="monthTax" checked />
+                <label htmlFor="mothTax">월세</label>
               </div>
               <div>
-                <label htmlFor="yearTax">
-                  <input type="checkbox" name="yearTax" />
-                  연세
-                </label>
+                <input id="yearTax" type="checkbox" name="yearTax" checked />
+                <label htmlFor="yearTax">연세</label>
               </div>
               <div>
-                <label htmlFor="totalTax">
-                  <input type="checkbox" name="totalTax" />
-                  전세
-                </label>
+                <input id="totalTax" type="checkbox" name="totalTax" checked />
+                <label htmlFor="totalTax">전세</label>
               </div>
               <div>
-                <label htmlFor="LHTax">
-                  <input type="checkbox" name="LHTax" />
-                  LH
-                </label>
+                <input id="LHTax" type="checkbox" name="LHTax" checked />
+                <label htmlFor="LHTax">LH</label>
               </div>
             </RentTypeModal>
           )}
@@ -130,52 +117,63 @@ const Filter = () => {
           </button>
           {active.price && (
             <PriceModal ref={modalEl}>
-              <div className="title-price">
-                <h2>월세</h2>
-                <div>
-                  {price.month[0]}만 원 ~ {price.month[1]}만 원
+              <div className="price-wrap">
+                <div className="title-price">
+                  <h2>월세</h2>
+                  <div>
+                    {price.month[0]}만 원 ~{' '}
+                    {price.month[1] === 100 ? '무제한' : `${price.month[1]}만 원`}
+                  </div>
                 </div>
+                <RangeSlider
+                  min={0}
+                  max={100}
+                  step={1}
+                  price={price.month}
+                  onChange={onMothTaxChange}
+                />
               </div>
-              <RangeSlider
-                min={0}
-                max={100}
-                step={1}
-                price={price.month}
-                onChange={onMothTaxChange}
-              />
-              <div className="title-price">
-                <h2>연세</h2>
-                <div>
-                  {price.year[0]}만 원 ~ {price.year[1]}만 원
+              <div className="price-wrap">
+                <div className="title-price">
+                  <h2>연세</h2>
+                  <div>
+                    {price.year[0]}만 원 ~{' '}
+                    {price.year[1] === 1000 ? '무제한' : `${price.year[1]}만 원`}
+                  </div>
                 </div>
+                <RangeSlider
+                  min={0}
+                  max={1000}
+                  step={1}
+                  price={price.year}
+                  onChange={onYearTaxChange}
+                />
               </div>
-              <RangeSlider
-                min={0}
-                max={1000}
-                step={1}
-                price={price.year}
-                onChange={onYearTaxChange}
-              />
-              <div className="title-price">
-                <h2>전세</h2>
-                <div>
-                  {price.total[0]}만 원 ~ {price.total[1]}만 원
+              <div className="price-wrap">
+                <div className="title-price">
+                  <h2>전세</h2>
+                  <div>
+                    {price.total[0]}만 원 ~{' '}
+                    {price.total[1] === 5000 ? '무제한' : `${price.total[1]}만 원`}
+                  </div>
                 </div>
+                <RangeSlider
+                  min={0}
+                  max={5000}
+                  step={1}
+                  price={price.total}
+                  onChange={onTotalTaxChange}
+                />
               </div>
-              <RangeSlider
-                min={0}
-                max={5000}
-                step={1}
-                price={price.total}
-                onChange={onTotalTaxChange}
-              />
-              <div className="title-price">
-                <h2>LH</h2>
-                <div>
-                  {price.LH[0]}만 원 ~ {price.LH[1]}만 원
+              <div className="price-wrap">
+                <div className="title-price">
+                  <h2>LH</h2>
+                  <div>
+                    {price.LH[0]}만 원 ~ {price.LH[1] === 100 ? '무제한' : `${price.LH[1]}만 원`}
+                  </div>
                 </div>
+                <RangeSlider min={0} max={100} step={1} price={price.LH} onChange={onLHTaxChange} />
               </div>
-              <RangeSlider min={0} max={100} step={1} price={price.LH} onChange={onLHTaxChange} />
             </PriceModal>
           )}
         </FilterButton>
@@ -187,12 +185,10 @@ const Filter = () => {
             <OptionModal ref={modalEl}>
               <h2>옵션</h2>
               <div className="option-wrap">
-                {filterOptions.map(o => (
-                  <div key={o.key}>
-                    <label htmlFor={Object.keys(o)}>
-                      <input type="checkbox" name={Object.keys(o)} />
-                      {Object.values(o)}
-                    </label>
+                {filterOptions.map((o, index) => (
+                  <div key={index}>
+                    <input id={Object.keys(o)} type="checkbox" name={Object.keys(o)} />
+                    <label htmlFor={Object.keys(o)}>{Object.values(o)}</label>
                   </div>
                 ))}
               </div>
@@ -216,17 +212,25 @@ const FilterWrap = styled.div`
 const SearchBox = styled.div`
   display: flex;
   flex: 0 0 20%;
+  border-radius: 0;
+  border: 0px;
+  border-right: 1px solid rgba(81, 99, 120, 0.3);
+  align-items: center;
   input {
     width: 100%;
     border-radius: 0;
     border: 0px;
-    border-right: 1px solid rgba(81, 99, 120, 0.3);
     outline: none;
     font-size: 18px;
-    padding: 2rem;
+    padding: 1.5rem;
+    padding-right: 0.5rem;
   }
   input::placeholder {
     color: rgba(81, 99, 120, 0.3);
+  }
+  svg {
+    margin-right: 1rem;
+    font-size: 20px;
   }
 `;
 
@@ -275,27 +279,60 @@ const FilterModal = styled.div`
   background-color: rgb(255, 255, 255);
   width: 320px;
   z-index: 99;
+  /* input[type='checkbox'] {
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    border: 0 none;
+    margin: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  } */
 `;
 
 const RoomTypeModal = styled(FilterModal)`
+  width: 200px;
   div {
     margin: 0.5rem auto;
+    display: flex;
+    align-items: center;
   }
   input {
     margin-right: 0.3rem;
+  }
+  input {
+    height: 20px;
+    width: 20px;
+  }
+  label {
+    font-size: 16px;
   }
 `;
 
 const RentTypeModal = styled(FilterModal)`
+  width: 200px;
   div {
     margin: 0.5rem auto;
+    display: flex;
+    align-items: center;
   }
   input {
     margin-right: 0.3rem;
   }
+  input {
+    height: 20px;
+    width: 20px;
+  }
+  label {
+    font-size: 16px;
+  }
 `;
 
 const PriceModal = styled(FilterModal)`
+  width: 400px;
   .title-price {
     display: flex;
     justify-content: space-between;
@@ -305,8 +342,12 @@ const PriceModal = styled(FilterModal)`
       margin: 0;
     }
   }
+  .price-wrap + .price-wrap {
+    margin-top: 3rem;
+  }
   input {
     width: 100%;
+    margin-bottom: 3rem;
   }
 `;
 
@@ -321,6 +362,9 @@ const OptionModal = styled(FilterModal)`
     }
     input {
       margin-right: 0.3rem;
+      color: ${oc.teal[5]};
+      background: ${oc.teal[5]};
+      background-color: ${oc.teal[5]};
     }
   }
 `;
