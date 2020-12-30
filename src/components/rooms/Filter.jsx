@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import oc from 'open-color';
+import RangeSlider from '@components/common/RangeSlider';
 import arrowDown from '@assets/svg/arrowDown.svg';
 import arrowUp from '@assets/svg/arrowUp.svg';
 
@@ -26,6 +27,16 @@ const filterOptions = [
 
 const Filter = () => {
   const [active, setActive] = useState({ room: false, sale: false, price: false, option: false });
+  const [price, setPrice] = useState({
+    month: [0, 100],
+    year: [0, 1000],
+    total: [0, 5000],
+    LH: [0, 100],
+  });
+  const onMothTaxChange = values => setPrice({ ...price, month: values });
+  const onYearTaxChange = values => setPrice({ ...price, yaer: values });
+  const onTotalTaxChange = values => setPrice({ ...price, total: values });
+  const onLHTaxChange = values => setPrice({ ...price, LH: values });
   const modalEl = useRef();
   const openModal = e => {
     const { name } = e.target;
@@ -121,24 +132,50 @@ const Filter = () => {
             <PriceModal ref={modalEl}>
               <div className="title-price">
                 <h2>월세</h2>
-                <div>20만원</div>
+                <div>
+                  {price.month[0]}만 원 ~ {price.month[1]}만 원
+                </div>
               </div>
-              <input type="range" name="monthPrice" defaultValue={0} />
+              <RangeSlider
+                min={0}
+                max={100}
+                step={1}
+                price={price.month}
+                onChange={onMothTaxChange}
+              />
               <div className="title-price">
                 <h2>연세</h2>
-                <div>300만원</div>
+                <div>
+                  {price.year[0]}만 원 ~ {price.year[1]}만 원
+                </div>
               </div>
-              <input type="range" name="yearPrice" defaultValue={0} />
+              <RangeSlider
+                min={0}
+                max={1000}
+                step={1}
+                price={price.year}
+                onChange={onYearTaxChange}
+              />
               <div className="title-price">
                 <h2>전세</h2>
-                <div>150만원</div>
+                <div>
+                  {price.total[0]}만 원 ~ {price.total[1]}만 원
+                </div>
               </div>
-              <input type="range" name="totalPrice" defaultValue={0} />
+              <RangeSlider
+                min={0}
+                max={5000}
+                step={1}
+                price={price.total}
+                onChange={onTotalTaxChange}
+              />
               <div className="title-price">
                 <h2>LH</h2>
-                <div>3만원</div>
+                <div>
+                  {price.LH[0]}만 원 ~ {price.LH[1]}만 원
+                </div>
               </div>
-              <input type="range" name="LHPrice" defaultValue={0} />
+              <RangeSlider min={0} max={100} step={1} price={price.LH} onChange={onLHTaxChange} />
             </PriceModal>
           )}
         </FilterButton>
