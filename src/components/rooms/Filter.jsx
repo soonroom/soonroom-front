@@ -34,16 +34,16 @@ const Filter = () => {
     total: [0, 5000],
     LH: [0, 100],
   });
+  const modalEl = useRef();
   const onMothTaxChange = values => setPrice({ ...price, month: values });
   const onYearTaxChange = values => setPrice({ ...price, yaer: values });
   const onTotalTaxChange = values => setPrice({ ...price, total: values });
   const onLHTaxChange = values => setPrice({ ...price, LH: values });
-  const modalEl = useRef();
   const openModal = e => {
     const { name } = e.target;
     setActive({ room: false, sale: false, price: false, option: false, [name]: !active[name] });
   };
-  const CloseModal = e => {
+  const closeModal = e => {
     const { name } = e.target;
     if (
       (active.room || active.sale || active.price || active.option) &&
@@ -52,9 +52,9 @@ const Filter = () => {
       setActive({ room: false, sale: false, price: false, option: false, [name]: !active[name] });
   };
   useEffect(() => {
-    window.addEventListener('click', CloseModal);
+    window.addEventListener('click', closeModal);
     return () => {
-      window.removeEventListener('click', CloseModal);
+      window.removeEventListener('click', closeModal);
     };
   }, [active]);
   return (
@@ -121,49 +121,28 @@ const Filter = () => {
                 <div className="title-price">
                   <h2>월세</h2>
                   <div>
-                    {price.month[0]}만 원 ~{' '}
-                    {price.month[1] === 100 ? '무제한' : `${price.month[1]}만 원`}
+                    {price.month[0]}만 원 ~ {price.month[1] === 100 ? '무제한' : `${price.month[1]}만 원`}
                   </div>
                 </div>
-                <RangeSlider
-                  min={0}
-                  max={100}
-                  step={1}
-                  price={price.month}
-                  onChange={onMothTaxChange}
-                />
+                <RangeSlider min={0} max={100} step={1} price={price.month} onChange={onMothTaxChange} />
               </div>
               <div className="price-wrap">
                 <div className="title-price">
                   <h2>연세</h2>
                   <div>
-                    {price.year[0]}만 원 ~{' '}
-                    {price.year[1] === 1000 ? '무제한' : `${price.year[1]}만 원`}
+                    {price.year[0]}만 원 ~ {price.year[1] === 1000 ? '무제한' : `${price.year[1]}만 원`}
                   </div>
                 </div>
-                <RangeSlider
-                  min={0}
-                  max={1000}
-                  step={1}
-                  price={price.year}
-                  onChange={onYearTaxChange}
-                />
+                <RangeSlider min={0} max={1000} step={1} price={price.year} onChange={onYearTaxChange} />
               </div>
               <div className="price-wrap">
                 <div className="title-price">
                   <h2>전세</h2>
                   <div>
-                    {price.total[0]}만 원 ~{' '}
-                    {price.total[1] === 5000 ? '무제한' : `${price.total[1]}만 원`}
+                    {price.total[0]}만 원 ~ {price.total[1] === 5000 ? '무제한' : `${price.total[1]}만 원`}
                   </div>
                 </div>
-                <RangeSlider
-                  min={0}
-                  max={5000}
-                  step={1}
-                  price={price.total}
-                  onChange={onTotalTaxChange}
-                />
+                <RangeSlider min={0} max={5000} step={1} price={price.total} onChange={onTotalTaxChange} />
               </div>
               <div className="price-wrap">
                 <div className="title-price">

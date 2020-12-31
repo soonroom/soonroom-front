@@ -27,7 +27,7 @@ const FindMaps = () => {
           strokeOpacity: 0,
           strokeWeight: 3,
           clickable: true,
-        })
+        }),
     );
     const markerObj = roomsCenter.map(
       r =>
@@ -39,14 +39,14 @@ const FindMaps = () => {
             size: new naverMaps.Size(10, 35),
             anchor: new naverMaps.Point(40, 40),
           },
-        })
+        }),
     );
     markerObj.forEach((m, index) => {
       naverMaps.Event.addListener(m, 'mouseover', () =>
-        polygonObj[index].setOptions({ fillOpacity: 0.3, strokeOpacity: 0.8 })
+        polygonObj[index].setOptions({ fillOpacity: 0.3, strokeOpacity: 0.8 }),
       );
       naverMaps.Event.addListener(m, 'mouseout', () =>
-        polygonObj[index].setOptions({ fillOpacity: 0, strokeOpacity: 0 })
+        polygonObj[index].setOptions({ fillOpacity: 0, strokeOpacity: 0 }),
       );
       naverMaps.Event.addListener(m, 'click', () => {
         section = index;
@@ -69,8 +69,8 @@ const FindMaps = () => {
               new naverMaps.Marker({
                 map,
                 position: new naverMaps.LatLng(r.lat, r.lng),
-              })
-            )
+              }),
+            ),
           );
         } else {
           rooms[section].map(r =>
@@ -78,8 +78,8 @@ const FindMaps = () => {
               new naverMaps.Marker({
                 map,
                 position: new naverMaps.LatLng(r.lat, r.lng),
-              })
-            )
+              }),
+            ),
           );
         }
         sectionMarker.map((s, index) =>
@@ -87,7 +87,7 @@ const FindMaps = () => {
             console.log(index);
             console.log(e);
             // 이 부분에 마커 클릭 이벤트 수정
-          })
+          }),
         );
       }
       if (zoomlevel < 17) {

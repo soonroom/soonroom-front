@@ -28,7 +28,7 @@ const loading = handleActions(
       eCode: code,
     }),
   },
-  initialState
+  initialState,
 );
 
 export default loading;
