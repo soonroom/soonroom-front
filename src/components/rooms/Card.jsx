@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import oc from 'open-color';
 import defaultImg from '@assets/img/placeholder.png';
@@ -7,14 +8,18 @@ const RoomList = ({ data }) => {
   return (
     <RoomCardWrap>
       <div className="img-box">
-        <img src={defaultImg} alt="" />
+        <Link to={`/room/${data.id}`}>
+          <img src={defaultImg} alt="" />
+        </Link>
       </div>
       <div className="data-box">
         <div className="room-rent">
           연세({data.rent.year}) 월세({data.rent.month})
         </div>
         <div>
-          <span className="room-title">{data.name}</span>
+          <Link to={`/room/${data.id}`}>
+            <span className="room-title">{data.name}</span>
+          </Link>
           <span>
             {data.room.roomCount === 1 && '원룸'}
             {data.room.roomCount === 2 && '투룸'}
