@@ -6,7 +6,7 @@
       "call": "010-1234-5678",
       "room": {
         "squareFeet": 16,
-        "roomCount": 3
+        "roomQty": 3
       },
       "rent": {
         "year": 345,
